@@ -1,14 +1,14 @@
 [
     {
-        "title": "python ",
+        "title": "python",
         "description": "learning",
-        "priority": 2,
+        "priority": 0,
         "status": "To-Do"
     },
     {
         "title": "java tutorial",
         "description": "learning",
         "priority": 1,
-        "status": "To-Do"
+        "status": "Done"
     }
 ]
