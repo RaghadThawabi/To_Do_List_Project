@@ -55,19 +55,11 @@ def view_tasks(tasks):
     print("End of Tasks")
 
 
-
+# I face a problem with duplication values when save to the file ,with a previous version of code , use this approach to ensure no duplication
 def save():
     try:
-        try:
-            with open("tasks.json", "r") as file:
-                previous_list = json.load(file)
-        except Exception :
-            previous_list = []
-
-        updated_list = previous_list + tasks
-
         with open("tasks.json", "w") as file:
-            json.dump(updated_list, file, indent=4)
+            json.dump(tasks, file, indent=4)
         print("Tasks saved successfully")
     except Exception:
         print("Error during saving:")
@@ -94,22 +86,22 @@ def sort_tasks():
 
 
 def mark_as_done():
-    tasks_data = load_data()
+    tasks_data_mark = load_data()
     task_name=input("Enter the task name: ")
-    for task in tasks_data:
+    for task in tasks_data_mark:
         if task['title'] == task_name:
             task['status'] = "Done"
     print(task_name +" : marked as Done")
 
     with open("tasks.json", "w") as file:
-        json.dump(tasks_data, file, indent=4)
+        json.dump(tasks_data_mark, file, indent=4)
     return
 
 
 def change_priority():
-    tasks_data = load_data()
+    tasks_data_priority = load_data()
     task_name = input("Enter the task name: ")
-    for task in tasks_data:
+    for task in tasks_data_priority:
         if task['title'] == task_name:
             while True:
                 try:
@@ -122,10 +114,24 @@ def change_priority():
             print(task_name +" :priority  changed successfully")
 
     with open("tasks.json", "w") as file:
+        json.dump(tasks_data_priority, file, indent=4)
+
+
+
+def delete_task():
+    tasks_data = load_data()
+    task_name = input("Enter the task name: ")
+    for task in tasks_data:
+        if task['title'] == task_name:
+            tasks_data.remove(task)
+            print(task_name + " deleted successfully")
+    with open("tasks.json", "w") as file:
         json.dump(tasks_data, file, indent=4)
 
-
 def main():
+    # this fix the problem I face , when loosing data after stop and rerun code , so now keep the previous data stored
+    global tasks
+    tasks =load_data()
     while True:
         menu()
         feature= input("Enter your choice please : ")
@@ -147,7 +153,7 @@ def main():
                 change_priority()
             case "6":
                 print("Delete Task")
-                #delete_task()
+                delete_task()
             case "7":
                 print("Exit")
                 exit()
