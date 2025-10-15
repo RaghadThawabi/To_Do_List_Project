@@ -36,7 +36,7 @@ def menu():
 
 
 #NEW , rename the class as singular
-class TaskOperation:
+class TaskManager:
     def __init__(self):
         self.tasks=self.load_data()
 
@@ -145,7 +145,7 @@ class TaskOperation:
 
 
     def delete_task(self):
-        task_id = input("Enter the task ID: ").strip()
+        task_id = int(input("Enter the task ID: "))
         task=self.find_task_by_id(task_id)
         if task:
             self.tasks.remove(task)
@@ -155,7 +155,7 @@ class TaskOperation:
 
 
 def main():
-    TaskOP = TaskOperation()
+    TaskOP = TaskManager()
     while True:
         menu()
         feature= input("Enter your choice please : ")
