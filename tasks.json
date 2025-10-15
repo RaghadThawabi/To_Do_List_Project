@@ -1,14 +1,16 @@
 [
     {
+        "id": 2,
         "title": "new task",
-        "description": "learning new task",
-        "priority": 2,
-        "status": "To-Do"
+        "description": "learning",
+        "priority": 0,
+        "status": "TO-DO"
     },
     {
-        "title": "data structure ",
-        "description": "learning DS",
-        "priority": 3,
-        "status": "To-Do"
+        "id": 1,
+        "title": "python",
+        "description": "learning ",
+        "priority": 2,
+        "status": "Done"
     }
 ]
