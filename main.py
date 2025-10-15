@@ -3,10 +3,10 @@ import uuid
 from itertools import count
 
 #NEW , Rename the class
-class Task:
+class TaskStructure:
     _id_counter = count(1)
     def __init__(self,title,description,priority,status="TO-DO",id=None):
-        self.id = id or next(Task._id_counter)
+        self.id = id or next(TaskStructure._id_counter)
         self.title=title
         self.description=description
         self.priority=priority
@@ -46,8 +46,8 @@ class TaskOperation:
                 with open("tasks.json", "r") as file:
                     tasks_from_file = json.load(file)
                     max_id = max([t["id"] for t in tasks_from_file], default=0)
-                    Task._id_counter = count(max_id + 1)
-                    return [Task(**t) for t in tasks_from_file]
+                    TaskStructure._id_counter = count(max_id + 1)
+                    return [TaskStructure(**t) for t in tasks_from_file]
             except FileNotFoundError:
                 return []
             except json.JSONDecodeError:
@@ -74,7 +74,7 @@ class TaskOperation:
             except ValueError:
                 print("Please enter a valid priority [0 - 5]")
  #NEW
-        task = Task(title,description,priority)
+        task = TaskStructure(title,description,priority)
         self.tasks.append(task)
         print("Task added : "+task.title ,f"ID: {task.id}")
         print(" please save the task to not loss it ")
@@ -145,7 +145,7 @@ class TaskOperation:
 
 
     def delete_task(self):
-        task_id = int(input("Enter the task ID: ").strip())
+        task_id = input("Enter the task ID: ").strip()
         task=self.find_task_by_id(task_id)
         if task:
             self.tasks.remove(task)
